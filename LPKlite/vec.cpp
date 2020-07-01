@@ -22,10 +22,10 @@ Vec::Vec(int len, double val) {
 }
 
 Vec::Vec(const Vec& vin) {
-	this->lenth = vin.lenth;
-	this->e = new double[lenth];
+	lenth = vin.lenth;
+	e = new double[lenth];
 	for (int i = 0; i < lenth; i++) {
-		e[i] = e[i]; //对[]进行了重载
+		e[i] = vin.e[i]; //对[]进行了重载
 	}
 }
 
@@ -38,6 +38,7 @@ Vec& Vec::operator=(const Vec& vin) {
 			for (int i = 0; i < lenth; i++) {
 				e[i] = vin.e[i];
 			}
+			return *this;
 		}
 	}
 }
@@ -77,21 +78,21 @@ double Vec::maxnorm() const{
 double Vec:: twonorm() const {
 	double temp = 0;
 	int i;
-	for (int i = 0; i < lenth; i += 4) {
+	for (i = 0; i < lenth; i += 4) {
 		temp += e[i] * e[i] + e[i + 1] * e[i + 1];
 		temp += e[i + 2] * e[i + 2] + e[i + 3] * e[i + 3];
 	}
-	for (; i < lenth; i++){
+	for (i=0; i < lenth; i++){
 		temp += e[i] * e[i];
 	}
 	return sqrt(temp);
 }
 
-inline Vec operator+(const Vec& vin) {
+ Vec operator+(const Vec& vin) {
 	return vin;
 }
 
-inline Vec operator-(const Vec& vin) {
+ Vec operator-(const Vec& vin) {
 	Vec vtemp(vin.lenth, 0.0);
 	return vtemp - vin;
 }
@@ -127,6 +128,7 @@ Vec operator*(double q, const Vec& vin) {
 		Vec vtemp = vin;
 		for (int i = 0; i < vin.size(); i++)
 			vtemp[i] *= q;
+		return vtemp;
 	}
 }
 
@@ -143,8 +145,11 @@ Vec operator*(const Vec & v0, const Vec& v1) {
 		for (int i = 0; i < v0.lenth; i++) {
 			vtemp.e[i] *= v1.e[i];
 		}
+		return vtemp;
 	}
 }
+
+
 
 double dot(const Vec& v0, const Vec& v1) {
 	if (v0.lenth != v1.lenth) {
@@ -163,7 +168,7 @@ Vec operator/(const Vec& vin, double d) {
 	for (int i = 0; i < vin.lenth; i++) {
 		vin[i] /= d;
 	}
-	return vin];
+	return vin;
 }
 
 

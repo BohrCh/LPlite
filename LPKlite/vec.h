@@ -17,8 +17,14 @@ public:
 	Vec& operator -=(const Vec&);   //v -+v0
 	double maxnorm() const;            //无穷范数，最大元素
 	double twonorm() const;             //二范数 
-	double& operator[](int i) const { return ets[i]; }
+	double& operator[](int i) const { return e[i]; }
 	                                                  //下标重载
+	void show() {
+		for (int i = 0; i < lenth; i++) {
+			std::cout << e[i]<<" ";
+		}
+		std::cout << std::endl;
+	}
 	friend Vec operator+(const Vec&); // return + v0
 	friend Vec operator-(const Vec&);  // return -v0
 	friend Vec operator+(const Vec&, const Vec&); //retrun v0+v1
