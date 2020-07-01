@@ -33,10 +33,7 @@ public:
 	//To do
 	//friend ostream& operator<<(ostream&, const Vec&);
 };
-inline void erro(char* v) {
-	std::cout << v << "./program exited\n";
-	exit(1);
-}
+
 
 
 
